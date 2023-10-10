@@ -1,5 +1,6 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'polls/style.css' %}" />
+<h4><a style="text-decoration: none; color: #0f766e; text-align: left; position: absolute; left: 1rem; top: 1rem" href="/polls/">Django Polls</a></h4>
 <div id="background">
   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
   incididunt ut labore et dolore magna aliqua. Tortor at auctor urna nunc id
@@ -37,13 +38,13 @@
   ultrices gravida. Sit amet consectetur adipiscing elit duis tristique
   sollicitudin.
 </div>
-<body style="background-color: rgb(255, 255, 255); margin-top: 100px">
+<body style="background-color: rgb(255, 255, 255);">
   <form action="{% url 'polls:vote' question.id %}" method="post">
     {% csrf_token %}
-    <fieldset style="border-radius: 10px; max-width: 998px">
+    <fieldset style="border-radius: 10px; max-width: 998px; margin-top: 100px;">
       <legend><h1>{{ question.question_text }}</h1></legend>
       {% if error_message %}
-      <p><strong>{{ error_message }}</strong></p>
+      <p style="color:#0f766e"><strong>{{ error_message }}</strong></p>
       {% endif %} {% for choice in question.choice_set.all %}
       <input
         type="radio"

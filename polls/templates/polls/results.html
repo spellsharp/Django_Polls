@@ -1,5 +1,21 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'polls/results.css' %}" />
+<h4>
+  <a
+    style="
+      flex: none;
+      text-decoration: none;
+      color: #0f766e;
+      text-align: left;
+      position: absolute;
+      left: 1rem;
+      top: 1rem;
+      margin-top: -50px;
+    "
+    href="/polls/"
+    >Django Polls</a
+  >
+</h4>
 <div id="background">
   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
   incididunt ut labore et dolore magna aliqua. Tortor at auctor urna nunc id
@@ -37,28 +53,31 @@
   ultrices gravida. Sit amet consectetur adipiscing elit duis tristique
   sollicitudin.
 </div>
-<h1 style="margin-top: 50px">{{ question.question_text }}</h1>
-
-<div
-  style="
-    margin-top: 100px;
-    font-weight: 100;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    max-width: 300px;
-    text-align: left;
-    margin-left: auto;
-    margin-right: auto;
-    border: solid 1px #0f766e;
-    border-radius: 20px;
-  "
->
-  <h4 style="text-align: left; font-size: 25px; margin-bottom: 1rem">Results</h4>
-  {% for choice in question.choice_set.all %}
-  <p>
-    {{ choice.choice_text }}: {{ choice.votes }} vote{{ choice.votes|pluralize }}
-  </p>
-  {% endfor %}
-</div>
-<!-- <a href="{% url 'polls:detail' question.id %}">Vote again?</a> -->
+<body>
+  <h1 style="max-width: 60%; margin-top: 50px; text-align: center; margin-left: auto; margin-right: auto">{{ question.question_text }}</h1>
+  <div
+    style="
+      margin-top: 100px;
+      font-weight: 100;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      max-width: 300px;
+      text-align: left;
+      margin-left: auto;
+      margin-right: auto;
+      border: solid 1px #0f766e;
+      border-radius: 20px;
+    "
+  >
+    <h4 style="text-align: left; font-size: 25px; margin-bottom: 1rem">
+      Results
+    </h4>
+    {% for choice in question.choice_set.all %}
+    <p>
+      {{ choice.choice_text }}: {{ choice.votes }} vote{{ choice.votes|pluralize }}
+    </p>
+    {% endfor %}
+  </div>
+  <!-- <a href="{% url 'polls:detail' question.id %}">Vote again?</a> -->
+</body>
