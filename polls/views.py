@@ -23,15 +23,12 @@ class ResultsView(generic.DetailView):
     model = Question
     template_name = "polls/results.html"
 
-def clear_session(request, question_id):
-    try:
-        del request.session['has_voted_' + str(question_id)]
-    except KeyError:
-        return HttpResponse("You have not voted yet.")
-    return HttpResponseRedirect(reverse("polls:detail", args=(question_id,)))
-
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
+    
+    # Get the user's previous vote, if any
+    previous_choice_id = request.session.get('has_voted_' + str(question.id))
+
     try:
         selected_choice = question.choice_set.get(pk=request.POST["choice"])
     except (KeyError, Choice.DoesNotExist):
@@ -43,14 +40,17 @@ def vote(request, question_id):
                 "error_message": "You didn't select a choice.",
             },
         )
-    else:
-        if 'has_voted_' + str(question.id) in request.session:
-            return render(request, 'polls/detail.html', {
-                'question': question,
-                'error_message': "You have already voted for this question.",
-            })
-        else:
-            selected_choice.votes += 1
-            selected_choice.save()
-            request.session['has_voted_' + str(question.id)] = True
-            return HttpResponseRedirect(reverse("polls:results", args=(question.id,)))
+
+    if previous_choice_id:
+        # User has already voted, update their vote
+        previous_choice = get_object_or_404(Choice, pk=previous_choice_id)
+        previous_choice.votes -= 1
+        previous_choice.save()
+    
+    selected_choice.votes += 1
+    selected_choice.save()
+    
+    # Update the user's session to store the new choice they voted for
+    request.session['has_voted_' + str(question.id)] = selected_choice.id
+    
+    return HttpResponseRedirect(reverse("polls:results", args=(question.id,)))

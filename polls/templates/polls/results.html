@@ -54,7 +54,17 @@
   sollicitudin.
 </div>
 <body>
-  <h1 style="max-width: 60%; margin-top: 50px; text-align: center; margin-left: auto; margin-right: auto">{{ question.question_text }}</h1>
+  <h1
+    style="
+      max-width: 60%;
+      margin-top: 50px;
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+    "
+  >
+    {{ question.question_text }}
+  </h1>
   <div
     style="
       margin-top: 100px;
@@ -78,6 +88,7 @@
       {{ choice.choice_text }}: {{ choice.votes }} vote{{ choice.votes|pluralize }}
     </p>
     {% endfor %}
+    <a style="text-decoration: none; color: #0f766e; margin-top: 30px; display: flex;" href="{% url 'polls:detail' question.id %}"><span style="font-size: 30px; margin-left: 10px; margin-right: 2px">&#8406;</span>Change vote</a>
   </div>
-  <!-- <a href="{% url 'polls:detail' question.id %}">Vote again?</a> -->
+  
 </body>
