@@ -1,0 +1,64 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'polls/results.css' %}" />
+<div id="background">
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+  incididunt ut labore et dolore magna aliqua. Tortor at auctor urna nunc id
+  cursus metus aliquam eleifend. Ultrices eros in cursus turpis massa tincidunt
+  dui ut ornare. Leo in vitae turpis massa sed elementum tempus egestas.
+  Molestie a iaculis at erat pellentesque. Massa eget egestas purus viverra.
+  Nisl purus in mollis nunc sed. Tellus pellentesque eu tincidunt tortor
+  aliquam. Arcu dui vivamus arcu felis. Arcu risus quis varius quam quisque id
+  diam vel. At erat pellentesque adipiscing commodo. Vitae auctor eu augue ut
+  lectus arcu. Dui accumsan sit amet nulla facilisi morbi tempus. Phasellus
+  faucibus scelerisque eleifend donec pretium vulputate sapien nec. Eros in
+  cursus turpis massa tincidunt. Maecenas accumsan lacus vel facilisis. Congue
+  mauris rhoncus aenean vel elit scelerisque mauris. Auctor elit sed vulputate
+  mi sit. Integer quis auctor elit sed vulputate mi sit amet. Justo nec ultrices
+  dui sapien eget. Tincidunt vitae semper quis lectus. Enim neque volutpat ac
+  tincidunt vitae semper quis lectus. Mauris pharetra et ultrices neque ornare
+  aenean euismod elementum. Massa eget egestas purus viverra. Diam ut venenatis
+  tellus in. Id neque aliquam vestibulum morbi blandit cursus risus. Eu sem
+  integer vitae justo eget magna. Faucibus in ornare quam viverra orci sagittis
+  eu. Facilisis leo vel fringilla est ullamcorper eget nulla facilisi.
+  Consectetur a erat nam at lectus urna duis convallis convallis. Elit sed
+  vulputate mi sit amet mauris. Scelerisque eleifend donec pretium vulputate
+  sapien nec. Viverra mauris in aliquam sem fringilla ut. Neque ornare aenean
+  euismod elementum nisi quis eleifend. Neque gravida in fermentum et
+  sollicitudin. Malesuada nunc vel risus commodo viverra maecenas accumsan. Orci
+  eu lobortis elementum nibh. Montes nascetur ridiculus mus mauris. Faucibus
+  vitae aliquet nec ullamcorper. Risus ultricies tristique nulla aliquet enim
+  tortor at. Neque vitae tempus quam pellentesque nec nam aliquam. Egestas
+  egestas fringilla phasellus faucibus scelerisque eleifend donec pretium.
+  Varius duis at consectetur lorem donec. Suspendisse ultrices gravida dictum
+  fusce ut placerat. Pretium lectus quam id leo in vitae turpis massa sed. Id
+  venenatis a condimentum vitae sapien pellentesque habitant morbi tristique.
+  Iaculis at erat pellentesque adipiscing commodo elit at. Orci a scelerisque
+  purus semper eget duis. Ut tristique et egestas quis ipsum suspendisse
+  ultrices gravida. Sit amet consectetur adipiscing elit duis tristique
+  sollicitudin.
+</div>
+<h1 style="margin-top: 50px">{{ question.question_text }}</h1>
+
+<div
+  style="
+    margin-top: 100px;
+    font-weight: 100;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    max-width: 300px;
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+    border: solid 1px #0f766e;
+    border-radius: 20px;
+  "
+>
+  <h4 style="text-align: left; font-size: 25px; margin-bottom: 1rem">Results</h4>
+  {% for choice in question.choice_set.all %}
+  <p>
+    {{ choice.choice_text }}: {{ choice.votes }} vote{{ choice.votes|pluralize }}
+  </p>
+  {% endfor %}
+</div>
+<!-- <a href="{% url 'polls:detail' question.id %}">Vote again?</a> -->
